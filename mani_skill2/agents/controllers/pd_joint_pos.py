@@ -45,7 +45,7 @@ class PDJointPosController(BaseController):
 
     def set_drive_targets(self, targets):
         for i, joint in enumerate(self.joints):
-            joint.set_drive_target(targets[i])
+            joint.set_drive_trget(targets[i])
 
     def set_action(self, action: np.ndarray):
         action = self._preprocess_action(action)
@@ -53,6 +53,7 @@ class PDJointPosController(BaseController):
         self._step = 0
         self._start_qpos = self.qpos
 
+        # print("")
         if self.config.use_delta:
             if self.config.use_target:
                 self._target_qpos = self._target_qpos + action
@@ -66,6 +67,7 @@ class PDJointPosController(BaseController):
             self._step_size = (self._target_qpos - self._start_qpos) / self._sim_steps
         else:
             self.set_drive_targets(self._target_qpos)
+        # print("gripper qpos change", self._target_qpos - self._start_qpos)
 
     def before_simulation_step(self):
         self._step += 1

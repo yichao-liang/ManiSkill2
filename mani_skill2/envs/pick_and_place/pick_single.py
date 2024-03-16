@@ -511,6 +511,8 @@ def build_actor_egad(
 class PickSingleEGADEnv(PickSingleEnv):
     DEFAULT_ASSET_ROOT = "{ASSET_DIR}/mani_skill2_egad"
     DEFAULT_MODEL_JSON = "info_pick_train_v0.json"
+    # todo: comment out for finegrained plot
+    # DEFAULT_MODEL_JSON = "info_raw_train.json"
 
     def _check_assets(self):
         splits = set()

@@ -2,7 +2,7 @@ import numpy as np
 import sapien.core as sapien
 
 from mani_skill2.agents.base_agent import BaseAgent
-from mani_skill2.agents.configs.xmate3 import defaults
+from mani_skill2.agents.configs.xarm7 import defaults
 from mani_skill2.utils.common import compute_angle_between
 from mani_skill2.utils.sapien_utils import (
     get_entity_by_name,
@@ -10,19 +10,20 @@ from mani_skill2.utils.sapien_utils import (
 )
 
 
-class Xmate3Robotiq(BaseAgent):
-    _config: defaults.Xmate3RobotiqDefaultConfig
+class Xarm7(BaseAgent):
+    _config: defaults.Xarm7DefaultConfig
 
     @classmethod
     def get_default_config(cls):
-        return defaults.Xmate3RobotiqDefaultConfig()
+        return defaults.Xarm7DefaultConfig()
 
     def _after_init(self):
+        # breakpoint()
         self.finger1_link: sapien.LinkBase = get_entity_by_name(
-            self.robot.get_links(), "left_inner_finger_pad"
+            self.robot.get_links(), "left_finger"
         )
         self.finger2_link: sapien.LinkBase = get_entity_by_name(
-            self.robot.get_links(), "right_inner_finger_pad"
+            self.robot.get_links(), "right_finger"
         )
 
     def check_grasp(self, actor: sapien.ActorBase, min_impulse=1e-6, max_angle=85):
